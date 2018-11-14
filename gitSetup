@@ -1,0 +1,8 @@
+[alias]
+	lna = log --oneline --decorate --all --graph --abbrev-commit --color -n 20
+
+[filter "lfs"]
+                clean = git-lfs clean -- %f
+                smudge = git-lfs smudge -- %f
+                process = git-lfs filter-process
+                required = true

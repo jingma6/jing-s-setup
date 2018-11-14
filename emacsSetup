@@ -1,0 +1,89 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;
+;;;;                               Melpa setup
+;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/") t)
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+(package-initialize)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;
+;;;;                               GUI setup
+;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(add-to-list 'default-frame-alist '(width . 130))
+(add-to-list 'default-frame-alist '(height . 55))
+(add-to-list 'default-frame-alist '(left . 515))
+(add-to-list 'default-frame-alist '(top . 25))
+(setq visible-bell nil)           ; Do not flash the frame for the visual bell
+(setq ring-bell-function 'ignore) ; Do not ring the bell at all
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;
+;;;;                               Editor setup
+;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(prefer-coding-system 'utf-8)
+(show-paren-mode 1)
+(electric-pair-mode 1)
+(global-hl-line-mode 1)
+(column-number-mode t)
+(ido-mode 1)
+(setq ido-enable-flex-matching t)
+(setq-default tab-width 4)
+(setq backup-directory-alist
+      `(("." . ,(concat user-emacs-directory "backups"))))
+
+(add-hook 'prog-mode-hook 'auto-revert-mode)
+(global-auto-revert-mode t)
+(add-to-list 'auto-mode-alist '("\\.pddl\\'" . lisp-mode))
+
+;; js setup
+(global-set-key (kbd "C-x j b") 'js-format-buffer)
+;; using "standard" as js formatter
+;; (after-load 'js2-mode
+;;   (add-hook 'js2-mode-hook
+;;             (lambda()
+;;               (js-format-setup "standard"))))
+
+;; using "jsbeautify-css" as css formatter
+;; (after-load 'css-mode
+;;   (add-hook 'css-mode-hook
+;;             (lambda()
+;;               (js-format-setup "jsb-css"))))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;
+;;;;                Emacs's custom-set-variables DO NOT EDIT!!!
+;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (base16-gruvbox-dark-medium)))
+ '(custom-safe-themes
+   (quote
+	("6daa09c8c2c68de3ff1b83694115231faa7e650fdbb668bc76275f0f2ce2a437" "4feee83c4fbbe8b827650d0f9af4ba7da903a5d117d849a3ccee88262805f40d" default)))
+ '(package-selected-packages (quote (js-format base16-theme go-mode))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
